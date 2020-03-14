@@ -10,6 +10,22 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        List<Number> numerosEntrados = readNumbersSum();
+
+        if (numerosEntrados.size() > 0) {
+            ConjuntoNumeros numeros = new ConjuntoNumeros(numerosEntrados.toArray(Number[]::new));
+            System.out.println(numeros.somar());
+        }
+
+        int integerNumber = readIntegerNumber();
+
+        if (integerNumber > 0){
+            IntegerNumber numero = new IntegerNumber(integerNumber);
+            numero.escreverTabuada();
+        }
+    }
+
+    public static List<Number> readNumbersSum() {
         System.out.println("Entre com os números que gostaria de somar, digite um número e tecle 'Enter' até que esteja satisfeito com suas escolhas." +
                 " Quando quiser parar digite 'stop'.");
 
@@ -18,52 +34,44 @@ public class Main {
 
         while (flag) {
             Scanner scanner = new Scanner(System.in);
-            String entrada = scanner.nextLine();
 
-            if (entrada.toUpperCase().equals("STOP")) {
+            if (scanner.hasNextInt()){
+                numerosEntrados.add(scanner.nextInt());
+            }else if(scanner.hasNextDouble()){
+                numerosEntrados.add(scanner.nextDouble());
+            }else if(scanner.hasNextFloat()){
+                numerosEntrados.add(scanner.nextFloat());
+            }else if (scanner.nextLine().toUpperCase().equals("STOP")){
                 flag = false;
-            } else {
-                try {
-                    numerosEntrados.add(Integer.parseInt(entrada));
-                } catch (NumberFormatException ex) {
-                    try {
-                        numerosEntrados.add(Double.parseDouble(entrada));
-                    } catch (NumberFormatException ex2) {
-                        try {
-                            numerosEntrados.add(Float.parseFloat(entrada));
-                        } catch (NumberFormatException ex3) {
-                            System.out.println("Entre com um número inteiro ou decimal!");
-                        }
-                    }
-                }
+            }else{
+                System.out.println("Entre com um número inteiro ou decimal! Ou digite 'Stop' para sair");
             }
         }
+        return numerosEntrados;
+    }
 
-        if (numerosEntrados.size() > 0){
-            ConjuntoNumeros numeros = new ConjuntoNumeros(numerosEntrados.toArray(Number[]::new));
-            System.out.println(numeros.somar());
-        }
-
+    public static int readIntegerNumber(){
         System.out.println("Entre com o número que gostaria de ver a tabuada. Se quiser sair digite 'stop'.");
-
-        flag = true;
+        int integerNumber;
+        boolean flag = true;
 
         while (flag){
             Scanner scannerTabuada = new Scanner(System.in);
-            String entradaTabuada = scannerTabuada.nextLine();
 
-            if(entradaTabuada.toUpperCase().equals("STOP")){
-                flag = false;
-            }else{
-                try {
-                    IntegerNumber numero = new IntegerNumber(Integer.parseInt(entradaTabuada));
-                    numero.escreverTabuada();
-                    flag = false;
-                } catch (NumberFormatException ex4) {
-                    System.out.println("Entre com um número inteiro");
+            if(scannerTabuada.hasNextInt()){
+                integerNumber = scannerTabuada.nextInt();
+
+                if (integerNumber > 0){
+                    return integerNumber;
+                }else{
+                    System.out.println("Entre com um número inteiro POSITIVO e MAIOR QUE ZERO!");
                 }
+            }else if(scannerTabuada.nextLine().toUpperCase().equals("STOP")){
+                return -1;
+            }else{
+                System.out.println("Entre com um número inteiro POSITIVO e MAIOR QUE ZERO!");
             }
         }
-
+        return -1;
     }
 }

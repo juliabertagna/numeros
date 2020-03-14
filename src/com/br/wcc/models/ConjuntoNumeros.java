@@ -1,6 +1,5 @@
 package com.br.wcc.models;
 
-import java.awt.geom.FlatteningPathIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,31 +14,19 @@ public class ConjuntoNumeros<T extends Number> {
     public Number somar(){
         if (numbers.get(0) instanceof Integer) {
             System.out.print("Soma de "+numbers.size()+" números inteiros = ");
-            int sum = 0;
+            List<Integer> listaInt = (List<Integer>)numbers;
 
-            for(T number:numbers){
-                sum += number.intValue();
-            }
-
-            return sum;
+            return listaInt.stream().reduce(0, Integer::sum);
         } else if (numbers.get(0) instanceof Double) {
             System.out.print("Soma de "+numbers.size()+" números Double = ");
-            double sum = 0D;
+            List<Double> listaDouble = (List<Double>)numbers;
 
-            for(T number:numbers){
-                sum += number.doubleValue();
-            }
-
-            return sum;
+            return listaDouble.stream().reduce(0.0D, Double::sum);
         } else if (numbers.get(0) instanceof Float) {
             System.out.print("Soma de "+numbers.size()+" números Float = ");
-            float sum = 0F;
+            List<Float> listaFloat = (List<Float>)numbers;
 
-            for(T number:numbers){
-                sum += number.floatValue();
-            }
-
-            return sum;
+            return listaFloat.stream().reduce(0.0F, Float::sum);
         } else {
             return null;
         }
