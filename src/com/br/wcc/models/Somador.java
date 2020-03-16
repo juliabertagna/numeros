@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConjuntoNumeros<T extends Number> {
+public class Somador<T extends Number> {
     private final List<T> numbers = new ArrayList<T>();
 
-    public ConjuntoNumeros(T... numeros) {
+    public Somador(T... numeros) {
         this.numbers.addAll(Arrays.asList(numeros));
     }
 

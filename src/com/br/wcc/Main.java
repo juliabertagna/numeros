@@ -1,7 +1,8 @@
 package com.br.wcc;
 
+import com.br.wcc.models.Fibonacci;
 import com.br.wcc.models.IntegerNumber;
-import com.br.wcc.models.ConjuntoNumeros;
+import com.br.wcc.models.Somador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +11,24 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        int sequenciaFib = readIntegerNumber("FIBONACCI");
+
+        for (int i = 1; i <= sequenciaFib; i++){
+            System.out.println(Fibonacci.imprimeSequencia(i));
+        }
+
         List<Number> numerosEntrados = readNumbersSum();
 
         if (numerosEntrados.size() > 0) {
-            ConjuntoNumeros numeros = new ConjuntoNumeros(numerosEntrados.toArray(Number[]::new));
+            Somador numeros = new Somador(numerosEntrados.toArray(Number[]::new));
             System.out.println(numeros.somar());
         }
 
-        int integerNumber = readIntegerNumber();
+        int integerNumber = readIntegerNumber("TABUADA");
 
         if (integerNumber > 0){
-            IntegerNumber numero = new IntegerNumber(integerNumber);
-            numero.escreverTabuada();
+           IntegerNumber numero = new IntegerNumber(integerNumber);
+           numero.escreverTabuada();
         }
     }
 
@@ -50,8 +57,13 @@ public class Main {
         return numerosEntrados;
     }
 
-    public static int readIntegerNumber(){
-        System.out.println("Entre com o número que gostaria de ver a tabuada. Se quiser sair digite 'stop'.");
+    public static int readIntegerNumber(String tipo){
+        if (tipo == "TABUADA"){
+            System.out.println("Entre com o número que gostaria de ver a tabuada. Se quiser sair digite 'stop'.");
+        }else if (tipo == "FIBONACCI"){
+            System.out.println("Entre com o número que se refere à quantidade de valores da sequência de Fibonacci que gostaria de ver. Se quiser sair digite 'stop'.");
+        }
+
         int integerNumber;
         boolean flag = true;
 

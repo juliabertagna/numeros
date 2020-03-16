@@ -16,4 +16,5 @@ public class IntegerNumber {
             System.out.println(n + " x "+ number+ " = " + (n*number));
         });
     }
+
 }
