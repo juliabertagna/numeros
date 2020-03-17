@@ -12,10 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         int sequenciaFib = readIntegerNumber("FIBONACCI");
-
-        for (int i = 1; i <= sequenciaFib; i++){
-            System.out.println(Fibonacci.imprimeSequencia(i));
-        }
+        Fibonacci.imprimeSequencia(sequenciaFib);
 
         List<Number> numerosEntrados = readNumbersSum();
 
